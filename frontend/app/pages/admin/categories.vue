@@ -50,13 +50,15 @@
           <table class="w-full border-collapse">
             <thead>
               <tr class="bg-slate-100 border-b border-slate-200">
-                <th class="border-r border-slate-200 px-6 py-4 text-center font-black text-slate-900 tracking-wider font-sans uppercase text-sm">KATEGORI</th>
-                <th class="px-6 py-4 text-center font-black text-slate-900 tracking-wider font-sans uppercase text-sm w-44">Aksi</th>
+                <th class="border-r border-slate-200 px-4 py-4 text-center font-black text-slate-900 tracking-wider font-sans uppercase text-sm w-20">NO</th>
+                <th class="border-r border-slate-200 px-6 py-4 text-left font-black text-slate-900 tracking-wider font-sans uppercase text-sm">KATEGORI</th>
+                <th class="border-r border-slate-200 px-6 py-4 text-left font-black text-slate-900 tracking-wider font-sans uppercase text-sm">SLUG</th>
+                <th class="px-6 py-4 text-center font-black text-slate-900 tracking-wider font-sans uppercase text-sm w-36">AKSI</th>
               </tr>
             </thead>
             <tbody>
               <tr v-if="loading">
-                <td colspan="2" class="text-center py-12">
+                <td colspan="4" class="text-center py-12">
                   <div class="flex justify-center items-center gap-2 text-slate-500 font-bold">
                     <span class="w-5 h-5 border-2 border-primary-500 border-t-transparent rounded-full animate-spin"></span>
                     <span>Memuat data...</span>
@@ -64,16 +66,24 @@
                 </td>
               </tr>
               <tr v-else-if="categories.length === 0" class="border-b border-slate-200">
-                <td colspan="2" class="text-center py-12 text-slate-400 font-semibold">
+                <td colspan="4" class="text-center py-12 text-slate-400 font-semibold">
                   Belum ada kategori yang ditemukan.
                 </td>
               </tr>
-              <tr v-else v-for="cat in categories" :key="cat.id" class="border-b border-slate-200 last:border-b-0">
-                <td class="border-r border-slate-200 px-6 py-4 text-center font-bold text-slate-800 text-sm">
+              <tr v-else v-for="(cat, index) in categories" :key="cat.id" class="border-b border-slate-200 last:border-b-0 hover:bg-slate-50/50 transition-colors">
+                <td class="border-r border-slate-200 px-4 py-4 text-center font-extrabold text-slate-500 text-sm">
+                  {{ (pagination.current_page - 1) * pagination.per_page + index + 1 }}
+                </td>
+                <td class="border-r border-slate-200 px-6 py-4 text-left font-bold text-slate-800 text-sm">
                   {{ cat.nama }}
                 </td>
+                <td class="border-r border-slate-200 px-6 py-4 text-left text-sm">
+                  <span class="px-2.5 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-mono font-semibold text-slate-600">
+                    {{ cat.slug }}
+                  </span>
+                </td>
                 <td class="px-6 py-4 text-center">
-                  <div class="flex items-center justify-center gap-4">
+                  <div class="flex items-center justify-center gap-3">
                     <button @click="openEditForm(cat)" class="p-1.5 hover:text-blue-600 transition-colors" title="Edit">
                       <Icon name="mdi:pencil-outline" class="text-2xl text-slate-700 hover:text-blue-600" />
                     </button>

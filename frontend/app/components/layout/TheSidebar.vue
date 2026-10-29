@@ -1,6 +1,6 @@
 <template>
-  <!-- Admin Sidebar: fixed, light gradient biru-cyan lembut -->
-  <aside class="fixed left-0 top-0 h-full w-64 border-r border-slate-100 z-40 flex flex-col"
+  <!-- Admin Sidebar: fixed full height, light gradient biru-cyan lembut -->
+  <aside class="fixed inset-y-0 left-0 h-screen w-64 border-r border-slate-100 z-40 flex flex-col"
     style="background: linear-gradient(180deg, #cbe2ff 0%, #a5cfff 100%);">
 
     <!-- Logo Brand -->
@@ -22,26 +22,28 @@
       </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="flex-1 overflow-y-auto px-3 py-2 space-y-1 scrollbar-hide">
+    <!-- Navigation & Bottom Logout -->
+    <div class="flex-1 flex flex-col justify-between overflow-y-auto px-3 py-2 scrollbar-hide">
       <!-- Main Menu -->
-      <NuxtLink v-for="item in menuItems" :key="item.href" :to="item.href"
-        class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-slate-700 hover:bg-white/20 hover:text-slate-900 active:scale-95 transition-all duration-200"
-        :class="{ '!bg-white/50 !text-primary-700 shadow-sm': isActive(item.href) }">
-        <Icon :name="item.icon" class="text-lg flex-shrink-0" />
-        <span>{{ item.label }}</span>
-      </NuxtLink>
+      <nav class="space-y-1">
+        <NuxtLink v-for="item in menuItems" :key="item.href" :to="item.href"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-slate-700 hover:bg-white/20 hover:text-slate-900 active:scale-95 transition-all duration-200"
+          :class="{ '!bg-white/50 !text-primary-700 shadow-sm': isActive(item.href) }">
+          <Icon :name="item.icon" class="text-lg flex-shrink-0" />
+          <span>{{ item.label }}</span>
+        </NuxtLink>
+      </nav>
 
-      <!-- Divider line -->
-      <div class="h-px bg-blue-900/10 my-4"></div>
-
-      <!-- Logout Button (as menu item in the list) -->
-      <button @click="logout"
-        class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-red-700 hover:bg-red-50/30 hover:text-red-950 active:scale-95 transition-all duration-200">
-        <Icon name="mdi:logout" class="text-lg flex-shrink-0" />
-        <span>Logout</span>
-      </button>
-    </nav>
+      <!-- Logout Button (pinned at bottom) -->
+      <div class="pt-4 pb-2">
+        <div class="h-px bg-blue-900/10 mb-3"></div>
+        <button @click="logout"
+          class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-red-700 hover:bg-red-50/40 hover:text-red-950 active:scale-95 transition-all duration-200">
+          <Icon name="mdi:logout" class="text-lg flex-shrink-0" />
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
   </aside>
 </template>
 
